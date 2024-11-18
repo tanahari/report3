@@ -52,16 +52,25 @@ public class Hero {
         }
     }
 
+     /**
+     *nameを呼び出すためのアクセサ
+     */
     public String getName(){    // メソッド
         return this.name;
     }
 
+     /**
+     *deadを呼び出すためのアクセサ
+     */
     public boolean getDeat(){    // メソッド
         return this.dead;
     }
 
+     /**
+     *hitPointを呼び出すためのアクセサ
+     */
     public int getHitPoint(){    // メソッド
         return this.hitPoint;
     }
-    
+
 }
