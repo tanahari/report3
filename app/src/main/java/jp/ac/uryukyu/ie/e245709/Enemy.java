@@ -1,7 +1,5 @@
 package jp.ac.uryukyu.ie.e245709;
 
-import org.checkerframework.checker.units.qual.h;
-
 /**
  * 敵クラス。
  *  String name; //敵の名前
@@ -10,71 +8,32 @@ import org.checkerframework.checker.units.qual.h;
  *  boolean dead; //敵の生死状態。true=死亡。
  * Created by tnal on 2016/11/13.
  */
-public class Enemy {
-    private String name;
-    private int hitPoint;
-    private int attack;
-    private boolean dead;
-
+public class Enemy extends LivingThing{
+    int hitPoint = getHitPoint();
+    boolean dead = isDead();
+    String name = getName();
     /**
      * コンストラクタ。名前、最大HP、攻撃力を指定する。
-     * @param name モンスター名
-     * @param maximumHP モンスターのHP
-     * @param attack モンスターの攻撃力
+     * @param name ヒーロー名
+     * @param maximumHP ヒーローのHP
+     * @param attack ヒーローの攻撃力
      */
     public Enemy (String name, int maximumHP, int attack) {
-        this.name = name;
-        hitPoint = maximumHP;
-        this.attack = attack;
-        dead = false;
-        System.out.printf("%sのHPは%d。攻撃力は%dです。\n", name, maximumHP, attack);
+        super(name, maximumHP, attack);
     }
 
     /**
-     * Heroへ攻撃するメソッド。
-     * attackに応じて乱数でダメージを算出し、hero.wounded()によりダメージ処理を実行。
-     * @param hero 攻撃対象
-     */
-    public void attack(Hero hero){
-        if( hitPoint > 0 ) {
-            int damage = (int)(Math.random() * attack);
-            System.out.printf("%sの攻撃！%sに%dのダメージを与えた！！\n", name, hero.getName(), damage);
-            hero.wounded(damage);
-        }
-    }
-
-    /**
+     * @Overrride
      * 自身へ攻撃されたときのダメージ処理をするメソッド。
      * 指定されたダメージを hitPoint から引き、死亡判定を行う。
      * @param damage 受けたダメージ
      */
     public void wounded(int damage){
-        hitPoint -= damage;
+        setHitPoint(hitPoint -= damage);
         if( hitPoint < 0 ) {
             dead = true;
+            setDead(dead);
             System.out.printf("モンスター%sは倒れた。\n", name);
         }
     }
-
-    /**
-     *nameを呼び出すためのアクセサ
-     */
-    public String getName(){    // メソッド
-        return this.name;
-    }
-
-     /**
-     *deadを呼び出すためのアクセサ
-     */
-    public boolean getDeat(){    // メソッド
-        return this.dead;
-    }
-
-     /**
-     *hitPointを呼び出すためのアクセサ
-     */
-    public int getHitPoint(){    // メソッド
-        return this.hitPoint;
-    }
-
 }
