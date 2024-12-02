@@ -27,6 +27,10 @@ public class LivingThing {
         return this.hitPoint;
     }
 
+    public int getAttck() {
+        return this.attack;
+    }
+
     public void setDead(boolean dead) {
         this.dead = dead;
     }
